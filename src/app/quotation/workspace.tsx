@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FileText, LockKeyhole, Plus, Printer, Send, ShieldCheck, Trash2, MessageCircle } from "lucide-react";
 
 type LineItem = { description: string; quantity: number; rate: number };
@@ -61,13 +61,13 @@ export function QuotationWorkspace() {
   const subtotal = useMemo(() => items.reduce((sum, item) => sum + (Number(item.quantity) || 0) * (Number(item.rate) || 0), 0), [items]);
   const total = subtotal + subtotal * (Number(tax) || 0) / 100;
 
-  useEffect(() => {
-    setDate(new Date().toISOString().slice(0, 10));
-  }, []);
-
   const unlock = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (password === "9419108003") { setUnlocked(true); setPasswordError(""); }
+    if (password === "9419108003") {
+      setDate(new Date().toISOString().slice(0, 10));
+      setUnlocked(true);
+      setPasswordError("");
+    }
     else setPasswordError("That password isn’t correct. Please try again.");
   };
 
@@ -87,7 +87,6 @@ export function QuotationWorkspace() {
     }
     setWhatsAppError("");
     const phoneNumber = enteredNumber.length === 10 ? `91${enteredNumber}` : enteredNumber;
-    const rows = items.map((item) => `${item.description} — ${item.quantity} × ${money(item.rate)} = ${money(item.quantity * item.rate)}`).join("\n");
     const greeting = customer ? `Dear ${customer},` : "Hello,";
     const message = `${greeting}\n\nPlease find your ${kind.toLowerCase()} attached.\n\nDocument: ${number}\nDate: ${date}\nTotal: ${money(total)}\n\nRegards,\n${business}\n${phone}`;
     const pdf = makePdf([

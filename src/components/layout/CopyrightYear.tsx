@@ -9,7 +9,8 @@ export function CopyrightYear() {
   const [year, setYear] = useState(2026);
 
   useEffect(() => {
-    setYear(new Date().getFullYear());
+    const timer = window.setTimeout(() => setYear(new Date().getFullYear()), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   return <>{year}</>;
