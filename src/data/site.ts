@@ -4,11 +4,11 @@ export const site = {
   tagline: "Clean Energy | Brighter Future",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   whatsapp: "919419108003",
+  phone: "9419108003",
   email: "energybrightbeam@gmail.com",
   serviceAddress: "Jakh, Samba, Jammu & Kashmir",
   contacts: [
-    { name: "Shiv Kumar", role: "Sales", phone: "8493946288" },
-    { name: "Naresh Singh", role: "", phone: "9419108003" },
+    { name: "Bright Beam Energy", role: "Sales & enquiries", phone: "9419108003" },
   ],
   // TODO: get the real address from the client. Must match Google Business Profile exactly.
   address: {
@@ -25,7 +25,7 @@ export const site = {
   },
 };
 
-export const primaryPhone = site.contacts[0].phone;
+export const primaryPhone = site.phone;
 export const whatsappLink = (text = "Hi Bright Beam Energy, I want a solar quote.") =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 
