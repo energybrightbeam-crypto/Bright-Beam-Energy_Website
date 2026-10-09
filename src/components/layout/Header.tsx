@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X, Calculator, Landmark, Info, PhoneCall } from "lucide-react";
+import { ChevronDown, Menu, X, Calculator, Landmark, Info, PhoneCall, FileText } from "lucide-react";
 import clsx from "clsx";
 import { offerings, solutions } from "@/data/services";
 import { locations } from "@/data/locations";
@@ -80,6 +80,8 @@ export function Header() {
 
         {/* desktop nav */}
         <nav ref={navRef} className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <Link href="/blogs" className="rounded-lg px-3 py-2 text-[15px] font-medium text-navy-900 hover:bg-mist">Blogs</Link>
+          <Link href="/quotation" className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-[15px] font-medium text-navy-900 hover:bg-mist"><FileText size={16} />Quotation</Link>
           {menus.map((m) => (
             <div key={m.id} className="relative">
               <button
@@ -147,10 +149,11 @@ export function Header() {
             <nav aria-label="Mobile" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-4">
               <div className="grid grid-cols-2 gap-2 py-4">
                 {[
+                  { label: "Blogs", href: "/blogs" },
+                  { label: "Quotation", href: "/quotation" },
                   { label: "Home", href: "/" },
                   { label: "Services", href: "/services" },
                   { label: "Locations", href: "/locations" },
-                  { label: "Blogs", href: "/blogs" },
                 ].map((item) => (
                   <Link key={item.href} href={item.href} onClick={closeAll} className="rounded-xl bg-mist px-3 py-3 text-center text-sm font-semibold text-navy-900 hover:bg-navy-900 hover:text-white">
                     {item.label}

@@ -6,7 +6,7 @@ import { blogs } from "@/data/blogs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.url;
-  const pages = ["", "/about", "/contact", "/subsidy", "/solar-calculator", "/services", "/locations", "/blogs"];
+  const pages = ["", "/about", "/contact", "/subsidy", "/solar-calculator", "/services", "/locations", "/blogs", "/quotation"];
   return [
     ...pages.map((p) => ({ url: `${base}${p}`, priority: p === "" ? 1 : 0.8 })),
     ...services.map((s) => ({ url: `${base}/services/${s.slug}`, priority: 0.8 })),
