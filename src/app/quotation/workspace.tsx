@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FileText, LockKeyhole, Plus, Printer, Send, ShieldCheck, Trash2, MessageCircle } from "lucide-react";
 
 type LineItem = { description: string; quantity: number; rate: number };
@@ -54,12 +54,16 @@ export function QuotationWorkspace() {
   const [whatsAppError, setWhatsAppError] = useState("");
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState("BBE-001");
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [date, setDate] = useState("");
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState("Thank you for choosing Bright Beam Energy.");
   const [items, setItems] = useState<LineItem[]>([{ description: "Solar panel system", quantity: 1, rate: 0 }]);
   const subtotal = useMemo(() => items.reduce((sum, item) => sum + (Number(item.quantity) || 0) * (Number(item.rate) || 0), 0), [items]);
   const total = subtotal + subtotal * (Number(tax) || 0) / 100;
+
+  useEffect(() => {
+    setDate(new Date().toISOString().slice(0, 10));
+  }, []);
 
   const unlock = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
